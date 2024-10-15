@@ -1,0 +1,48 @@
+#include <iostream>
+#include <list>
+#include <vector>
+using namespace std;
+
+vector<int> quicksort(vector<int> vect)
+{
+	vector<int> dom;
+	vector<int> poslem;
+	int pivot;
+	if (vect.size() >= 2)
+		pivot = vect[0];
+
+	if (vect.size() < 2)
+		return vect;
+	
+	for (int i = 1; i < vect.size(); i++)
+	{
+		if (vect[i] < pivot)
+			dom.push_back(vect[i]);
+		else
+			poslem.push_back(vect[i]);
+	}
+
+	
+
+	vector<int> sorted = quicksort(dom);
+	sorted.push_back(pivot);
+
+	vector<int> posleSorted = quicksort(poslem);
+	sorted.insert(sorted.end(), posleSorted.begin(), posleSorted.end());
+
+	return sorted;
+}
+
+
+int main()
+{
+	vector<int> my_list = {9, 2, 6, 1, 4};
+	vector<int> newSorted = quicksort(my_list);
+
+	for (int i = 0; i < newSorted.size(); i++)
+	{
+		cout << newSorted[i];
+
+	}
+}
+
